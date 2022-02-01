@@ -14,6 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/Facturas', function () {
+    return view('facturas.facturas');
+})->name('facturas');
+Route::resource('Compras','ShoppingController');
+Route::resource('Facturas','InvoiceController');
 
 Auth::routes();
 

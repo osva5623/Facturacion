@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use App\Shopping;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShoppingController extends Controller
 {
@@ -14,7 +16,8 @@ class ShoppingController extends Controller
      */
     public function index()
     {
-        //
+        $products=Product::all();
+        return view('compras.compras',compact('products'));
     }
 
     /**
@@ -35,7 +38,13 @@ class ShoppingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $arreglo=[
+            'user_id'=>auth()->user()->id,
+            'product_id'=>$request->producto,
+            'invoiced'=>0
+        ];
+        Shopping::create($arreglo);
+        return back()->with('status','Acutalizado con éxito');
     }
 
     /**
